@@ -18,7 +18,7 @@ def setup_logging(loglevel):
 
 
 def main(args):
-    args, subparser = main_args.setup_parsers()
+    args = main_args.parser.parse_args(args)
     setup_logging(args.loglevel)
     _logger.debug("Starting crazy calculations...")
     _logger.info("Script ends here")
