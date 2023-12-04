@@ -28,5 +28,14 @@ subparsers = parser.add_subparsers(
 command_parser = subparsers.add_parser(
     "command", aliases=["cmd"], help="Top-level command"
 )
-
 command_parser.add_argument("--command-args", help="Arguments for the command")
+argsmod.add_common_args(command_parser)
+
+subcommand_parser = command_parser.add_subparsers(
+    dest="subcommand", help="Available subcommands"
+)
+subcommand_parser = subcommand_parser.add_parser(
+    "subcommand", aliases=["subcmd"], help="Subcommand"
+)
+subcommand_parser.add_argument("--subcommand-args", help="Arguments for the subcommand")
+argsmod.add_common_args(subcommand_parser)
