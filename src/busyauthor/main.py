@@ -24,7 +24,6 @@ import logging
 import sys
 
 from busyauthor import main_args
-from busyauthor import command
 
 __author__ = "Taylor Monacelli"
 __copyright__ = "Taylor Monacelli"
