@@ -1,6 +1,6 @@
 import pytest
 
-from busyauthor.skeleton import fib, main
+from busyauthor.main import fib, main
 
 __author__ = "Taylor Monacelli"
 __copyright__ = "Taylor Monacelli"
