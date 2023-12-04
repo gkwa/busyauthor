@@ -14,3 +14,5 @@ parser.add_argument(
     action="version",
     version=f"busyauthor {__version__}",
 )
+
+parser.add_argument("--db", help="Specify the database file (e.g., data.cypher)")
