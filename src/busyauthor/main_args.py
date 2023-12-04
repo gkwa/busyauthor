@@ -1,5 +1,6 @@
 import argparse
 import logging
+import pprint
 
 
 def setup_parsers():
@@ -30,4 +31,6 @@ def setup_parsers():
         dest="command",
     )
 
+
+    pprint.pprint(vars(parser))
     return parser, subparsers
