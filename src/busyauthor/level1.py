@@ -1,11 +1,6 @@
 from . import args_common, level2
 
 
-def add_arguments(parser):
-    parser.add_argument("--command-args", help="command arguments")
-    args_common.add_common_args(parser)
-
-
 def add_subparsers(parser):
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
 
@@ -14,8 +9,19 @@ def add_subparsers(parser):
         help="command help",
         aliases=["cmd"],
     )
-    add_arguments(parser)
+
+    parser.add_argument("--command-args", help="command arguments")
+    args_common.add_common_args(parser)
 
     level2.add_subparsers(parser)
+
+    parser = subparsers.add_parser(
+        "command2",
+        help="command2 help",
+        aliases=["cmd2"],
+    )
+
+    parser.add_argument("--command2-args", help="command2 arguments")
+    args_common.add_common_args(parser)
 
     return parser

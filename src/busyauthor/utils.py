@@ -4,6 +4,9 @@ def print_command_hierarchy(args):
     command = getattr(args, "command", None)
     command_args = getattr(args, "command_args", None)
 
+    command2 = getattr(args, "command2", None)
+    command2_args = getattr(args, "command2_args", None)
+
     subcommand = getattr(args, "subcommand", None)
     subcommand_args = getattr(args, "subcommand_args", None)
 
@@ -21,6 +24,9 @@ def print_command_hierarchy(args):
     if command:
         print(f"Command: {command}")
         print(f"Command Args: {command_args}")
+
+        print(f"Command2: {command2}")
+        print(f"Command2 Args: {command2_args}")
 
         if subcommand:
             print(f"Subcommand: {subcommand}")
