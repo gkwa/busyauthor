@@ -1,4 +1,4 @@
-from . import args_common, subcommand
+from . import args_common, level2
 
 
 def add_arguments(parser):
@@ -16,6 +16,6 @@ def add_subparsers(parser):
     )
     add_arguments(parser)
 
-    subcommand.add_subparsers(parser)
+    level2.add_subparsers(parser)
 
     return parser
