@@ -1,13 +1,8 @@
+import argparse
 import logging
 import sys
 
-from busyauthor import main_args
-
-__author__ = "Taylor Monacelli"
-__copyright__ = "Taylor Monacelli"
-__license__ = "MPL-2.0"
-
-_logger = logging.getLogger(__name__)
+from . import __version__, args_common, command, utils
 
 
 def setup_logging(loglevel):
@@ -17,41 +12,34 @@ def setup_logging(loglevel):
     )
 
 
-def print_command_hierarchy(args):
-    db_file = args.db
-    command = getattr(args, "command", None)
-    command_args = getattr(args, "command_args", None)
-    subcommand = getattr(args, "subcommand", None)
-    subcommand_args = getattr(args, "subcommand_args", None)
-    subsubcommand = getattr(args, "subsubcommand", None)
-    subsubcommand_args = getattr(args, "subsubcommand_args", None)
-    subsubsubcommand = getattr(args, "subsubsubcommand", None)
-    subsubsubcommand_args = getattr(args, "subsubsubcommand_args", None)
+__author__ = "Taylor Monacelli"
+__copyright__ = "Taylor Monacelli"
+__license__ = "MPL-2.0"
 
-    print(f"Database File: {db_file}")
+_logger = logging.getLogger(__name__)
 
-    if command:
-        print(f"Command: {command}")
-        print(f"Command Args: {command_args}")
 
-        if subcommand:
-            print(f"Subcommand: {subcommand}")
-            print(f"Subcommand Args: {subcommand_args}")
+parser = argparse.ArgumentParser(
+    description="Just a command, sub command, subsub command demonstration"
+)
 
-            if subsubcommand:
-                print(f"Subsubcommand: {subsubcommand}")
-                print(f"Subsubcommand Args: {subsubcommand_args}")
+args_common.add_common_args(parser)
 
-                if subsubsubcommand:
-                    print(f"Subsubsubcommand: {subsubsubcommand}")
-                    print(f"Subsubsubcommand Args: {subsubsubcommand_args}")
+parser.add_argument(
+    "--version",
+    action="version",
+    version=f"busyauthor {__version__}",
+)
+parser.add_argument("--db", help="Specify the database file (e.g., data.cypher)")
+
+command.add_subparsers(parser)
 
 
 def main(args):
-    args = main_args.parser.parse_args(args)
+    args = parser.parse_args(args)
     setup_logging(args.loglevel)
     _logger.debug("Starting crazy calculations...")
-    print_command_hierarchy(args)
+    utils.print_command_hierarchy(args)
     _logger.info("Script ends here")
 
 

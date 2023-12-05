@@ -1,4 +1,4 @@
-from busyauthor import args_common
+from . import args_common
 
 
 def add_arguments(parser):
