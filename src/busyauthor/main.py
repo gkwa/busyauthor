@@ -2,7 +2,7 @@ import argparse
 import logging
 import sys
 
-from . import __version__, args_common, level1, utils
+from . import __version__, args_common, level1, level2, utils
 
 
 def setup_logging(loglevel):
@@ -40,6 +40,32 @@ def main(args):
     setup_logging(args.loglevel)
     _logger.debug("Starting crazy calculations...")
     utils.print_command_hierarchy(args)
+    db_file = args.db
+
+    command = getattr(args, "command", None)
+    command_args = getattr(args, "command_args", None)
+
+    command2 = getattr(args, "command2", None)
+    command2_args = getattr(args, "command2_args", None)
+
+    subcommand = getattr(args, "subcommand", None)
+    subcommand_args = getattr(args, "subcommand_args", None)
+
+    subsubcommand = getattr(args, "subsubcommand", None)
+    subsubcommand_args = getattr(args, "subsubcommand_args", None)
+
+    subsubsubcommand = getattr(args, "subsubsubcommand", None)
+    subsubsubcommand_args = getattr(args, "subsubsubcommand_args", None)
+
+    subsubsubsubcommand = getattr(args, "subsubsubsubcommand", None)
+    subsubsubsubcommand_args = getattr(args, "subsubsubsubcommand_args", None)
+
+    if command:
+        level1.dostuff()
+
+        if subcommand:
+            level2.dostuff()
+
     _logger.info("Script ends here")
 
 

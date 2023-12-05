@@ -20,3 +20,7 @@ def add_subparsers(parser):
     level3.add_subparsers(parser)
 
     return parser
+
+
+def dostuff():
+    print("doing 'subcommand' related stuff")

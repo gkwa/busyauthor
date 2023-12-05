@@ -25,3 +25,7 @@ def add_subparsers(parser):
     args_common.add_common_args(parser)
 
     return parser
+
+
+def dostuff():
+    print("doing 'command' related stuff")
