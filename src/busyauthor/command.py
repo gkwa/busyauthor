@@ -1,7 +1,5 @@
 from busyauthor import args_common, subcommand
 
-parser = None
-
 
 def add_arguments(parser):
     parser.add_argument("--command-args", help="command arguments")
