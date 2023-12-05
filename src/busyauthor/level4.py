@@ -1,4 +1,4 @@
-from . import args_common, level5
+from . import args_common, module_b
 
 
 def add_arguments(parser):
@@ -17,8 +17,12 @@ def add_subparsers(parser):
         aliases=["subsubsubcmd"],
     )
 
-    level5.add_subparsers(parser)
+    module_b.add_subparsers(parser)
 
     add_arguments(parser)
 
     return parser
+
+
+def dostuff():
+    print("doing work")

@@ -2,7 +2,7 @@ import argparse
 import logging
 import sys
 
-from . import __version__, args_common, level1, level2, utils
+from . import __version__, args_common, level2, level3, level4, module_a, module_b
 
 
 def setup_logging(loglevel):
@@ -32,39 +32,50 @@ parser.add_argument(
 )
 parser.add_argument("--db", help="Specify the database file (e.g., data.cypher)")
 
-level1.add_subparsers(parser)
+module_a.add_subparsers(parser)
 
 
 def main(args):
     args = parser.parse_args(args)
     setup_logging(args.loglevel)
     _logger.debug("Starting crazy calculations...")
-    utils.print_command_hierarchy(args)
-    db_file = args.db
+    db_file = args.db  # noqa: F841
 
     command = getattr(args, "command", None)
-    command_args = getattr(args, "command_args", None)
-
-    command2 = getattr(args, "command2", None)
-    command2_args = getattr(args, "command2_args", None)
-
-    subcommand = getattr(args, "subcommand", None)
-    subcommand_args = getattr(args, "subcommand_args", None)
-
-    subsubcommand = getattr(args, "subsubcommand", None)
-    subsubcommand_args = getattr(args, "subsubcommand_args", None)
-
-    subsubsubcommand = getattr(args, "subsubsubcommand", None)
-    subsubsubcommand_args = getattr(args, "subsubsubcommand_args", None)
-
-    subsubsubsubcommand = getattr(args, "subsubsubsubcommand", None)
-    subsubsubsubcommand_args = getattr(args, "subsubsubsubcommand_args", None)
 
     if command:
-        level1.dostuff()
+        command_args = getattr(args, "command_args", None)  # noqa: F841
+        module_a.dostuff()
+
+        subcommand = getattr(args, "subcommand", None)
 
         if subcommand:
+            subcommand_args = getattr(args, "subcommand_args", None)  # noqa: F841
             level2.dostuff()
+
+            subsubcommand = getattr(args, "subsubcommand", None)
+
+            if subsubcommand:
+                subsubcommand_args = getattr(  # noqa: F841
+                    args, "subsubcommand_args", None
+                )
+                level3.dostuff()
+
+                subsubsubcommand = getattr(args, "subsubsubcommand", None)
+
+                if subsubsubcommand:
+                    subsubsubcommand_args = getattr(  # noqa: F841
+                        args, "subsubsubcommand_args", None
+                    )
+                    level4.dostuff()
+
+                    subsubsubsubcommand = getattr(args, "subsubsubsubcommand", None)
+
+                    if subsubsubsubcommand:
+                        subsubsubsubcommand_args = getattr(  # noqa: F841
+                            args, "subsubsubsubcommand_args", None
+                        )
+                        module_b.dostuff()
 
     _logger.info("Script ends here")
 

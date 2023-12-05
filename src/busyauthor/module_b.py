@@ -22,3 +22,7 @@ def add_subparsers(parser):
     add_arguments(parser)
 
     return parser
+
+
+def dostuff():
+    print("doing work")

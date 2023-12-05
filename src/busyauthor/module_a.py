@@ -28,4 +28,4 @@ def add_subparsers(parser):
 
 
 def dostuff():
-    print("doing 'command' related stuff")
+    print("doing work")
