@@ -18,11 +18,4 @@ def add_subparsers(parser):
 
     subcommand.add_subparsers(parser)
 
-    parser = subparsers.add_parser(
-        "command2",
-        help="command2 help",
-        aliases=["cmd2"],
-    )
-    add_arguments(parser)
-
     return parser
