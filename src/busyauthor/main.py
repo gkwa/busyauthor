@@ -2,7 +2,7 @@ import argparse
 import logging
 import sys
 
-from . import __version__, args_common, command, command2, utils
+from . import __version__, args_common, command, utils
 
 
 def setup_logging(loglevel):
@@ -33,7 +33,6 @@ parser.add_argument(
 parser.add_argument("--db", help="Specify the database file (e.g., data.cypher)")
 
 command.add_subparsers(parser)
-command2.add_subparsers(parser)
 
 
 def main(args):
