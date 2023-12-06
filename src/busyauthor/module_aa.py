@@ -1,5 +1,7 @@
 from . import args_common, module_aaa
 
+command_aliases = ["subcmd"]
+
 
 def add_arguments(parser):
     parser.add_argument("--subcommand-args", help="subcommand arguments")
@@ -12,7 +14,7 @@ def add_subparsers(parser):
     parser = subparsers.add_parser(
         "subcommand",
         help="subcommand help",
-        aliases=["subcmd"],
+        aliases=command_aliases,
     )
 
     add_arguments(parser)
@@ -22,5 +24,5 @@ def add_subparsers(parser):
     return parser
 
 
-def dostuff():
-    print("doing work")
+def dostuff(args):
+    print("doing work in subcommand")

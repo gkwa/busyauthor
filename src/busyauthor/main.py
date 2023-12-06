@@ -5,7 +5,8 @@ import sys
 from . import (
     __version__,
     args_common,
-    module_a,
+    module_a1,
+    module_a2,
     module_aa,
     module_aaa,
     module_aaaa,
@@ -13,11 +14,26 @@ from . import (
 )
 
 
-def setup_logging(loglevel):
+def setup_logging(loglevel=None, logger=None):
+    """Setup basic logging
+
+    Args:
+        loglevel (Optional[int]): minimum loglevel for emitting messages, defaults to None.   # noqa: E501
+        logger (Optional[logging.Logger]): Logger instance, defaults to None.
+    """
     logformat = "[%(asctime)s] %(levelname)s:%(name)s:%(message)s"
-    logging.basicConfig(
-        level=loglevel, stream=sys.stdout, format=logformat, datefmt="%Y-%m-%d %H:%M:%S"
-    )
+    handler = logging.StreamHandler()
+    handler.setFormatter(logging.Formatter(logformat, datefmt="%Y-%m-%d %H:%M:%S"))
+
+    if logger is None:
+        logger = logging.getLogger(__name__)
+
+    if loglevel is not None:
+        logger.setLevel(loglevel)
+    else:
+        logger.setLevel(logging.WARN)
+
+    logger.addHandler(handler)
 
 
 __author__ = "Taylor Monacelli"
@@ -40,7 +56,10 @@ parser.add_argument(
 )
 parser.add_argument("--db", help="Specify the database file (e.g., data.cypher)")
 
-module_a.add_subparsers(parser)
+subparser = parser.add_subparsers(dest="command", help="Available commands")
+
+module_a1.add_subparsers(subparser)
+module_a2.add_subparsers(subparser)
 
 
 def main(args):
@@ -49,41 +68,34 @@ def main(args):
     _logger.debug("Starting crazy calculations...")
     db_file = args.db  # noqa: F841
 
-    command = getattr(args, "command", None)
+    cmd = getattr(args, "command", None)
+    if cmd == "command2" or cmd in module_a2.command_aliases:
+        cmd_args = getattr(args, "command2_args", None)
+        module_a2.dostuff(cmd_args)
 
-    if command:
-        command_args = getattr(args, "command_args", None)  # noqa: F841
-        module_a.dostuff()
+    if cmd == "command" or cmd in module_a1.command_aliases:
+        cmd_args = getattr(args, "command_args", None)
+        module_a1.dostuff(cmd_args)
 
-        subcommand = getattr(args, "subcommand", None)
+        cmd = getattr(args, "subcommand", None)
+        if cmd == "subcommand" or cmd in module_aa.command_aliases:
+            cmd_args = getattr(args, "subcommand_args", None)
+            module_aa.dostuff(cmd_args)
 
-        if subcommand:
-            subcommand_args = getattr(args, "subcommand_args", None)  # noqa: F841
-            module_aa.dostuff()
+            cmd = getattr(args, "subsubcommand", None)
+            if cmd == "subsubcommand" or cmd in module_aaa.command_aliases:
+                cmd_args = getattr(args, "subsubcommand_args", None)
+                module_aaa.dostuff(cmd_args)
 
-            subsubcommand = getattr(args, "subsubcommand", None)
+                cmd = getattr(args, "subsubsubcommand", None)
+                if cmd == "subsubsubcommand" or cmd in module_aaaa.command_aliases:
+                    cmd_args = getattr(args, "subsubsubcommand_args", None)
+                    module_aaaa.dostuff(cmd_args)
 
-            if subsubcommand:
-                subsubcommand_args = getattr(  # noqa: F841
-                    args, "subsubcommand_args", None
-                )
-                module_aaa.dostuff()
-
-                subsubsubcommand = getattr(args, "subsubsubcommand", None)
-
-                if subsubsubcommand:
-                    subsubsubcommand_args = getattr(  # noqa: F841
-                        args, "subsubsubcommand_args", None
-                    )
-                    module_aaaa.dostuff()
-
-                    subsubsubsubcommand = getattr(args, "subsubsubsubcommand", None)
-
-                    if subsubsubsubcommand:
-                        subsubsubsubcommand_args = getattr(  # noqa: F841
-                            args, "subsubsubsubcommand_args", None
-                        )
-                        module_aaaaa.dostuff()
+                    cmd = getattr(args, "subsubsubsubcommand", None)
+                    if cmd == "subsubsubcommand" or cmd in module_aaaaa.command_aliases:
+                        cmd_args = getattr(args, "subsubsubsubcommand_args", None)
+                        module_aaaaa.dostuff(cmd_args)
 
     _logger.info("Script ends here")
 
