@@ -2,7 +2,15 @@ import argparse
 import logging
 import sys
 
-from . import __version__, args_common, module_a, module_b, module_c, module_d, module_e
+from . import (
+    __version__,
+    args_common,
+    module_a,
+    module_aa,
+    module_aaa,
+    module_aaaa,
+    module_aaaaa,
+)
 
 
 def setup_logging(loglevel):
@@ -51,7 +59,7 @@ def main(args):
 
         if subcommand:
             subcommand_args = getattr(args, "subcommand_args", None)  # noqa: F841
-            module_b.dostuff()
+            module_aa.dostuff()
 
             subsubcommand = getattr(args, "subsubcommand", None)
 
@@ -59,7 +67,7 @@ def main(args):
                 subsubcommand_args = getattr(  # noqa: F841
                     args, "subsubcommand_args", None
                 )
-                module_c.dostuff()
+                module_aaa.dostuff()
 
                 subsubsubcommand = getattr(args, "subsubsubcommand", None)
 
@@ -67,7 +75,7 @@ def main(args):
                     subsubsubcommand_args = getattr(  # noqa: F841
                         args, "subsubsubcommand_args", None
                     )
-                    module_d.dostuff()
+                    module_aaaa.dostuff()
 
                     subsubsubsubcommand = getattr(args, "subsubsubsubcommand", None)
 
@@ -75,7 +83,7 @@ def main(args):
                         subsubsubsubcommand_args = getattr(  # noqa: F841
                             args, "subsubsubsubcommand_args", None
                         )
-                        module_e.dostuff()
+                        module_aaaaa.dostuff()
 
     _logger.info("Script ends here")
 
