@@ -151,6 +151,14 @@ def test_main_with_command2_with_arg(capfd):
     assert captured.out.strip() == "doing work in command2"
 
 
+def test_main_with_command3_alias_subcommand(capfd):
+    """Test CLI with help argument"""
+    main(["command3", "-v", "--command3-args", "test"])
+    captured = capfd.readouterr()
+    assert "INFO:busyauthor.main:Script ends here" in captured.err
+    assert "command3_args='test'" in captured.out.strip()
+
+
 def test_main_with_subsubcommand(capfd):
     """Test CLI with help argument"""
     main(["cmd", "subcmd", "subsubcmd"])

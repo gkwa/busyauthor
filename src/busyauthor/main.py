@@ -7,6 +7,7 @@ from . import (
     args_common,
     module_a1,
     module_a2,
+    module_a3,
     module_aa,
     module_aaa,
     module_aaaa,
@@ -60,6 +61,7 @@ subparser = parser.add_subparsers(dest="command", help="Available commands")
 
 module_a1.add_subparsers(subparser)
 module_a2.add_subparsers(subparser)
+module_a3.add_subparsers(subparser)
 
 
 def main(args):
@@ -69,6 +71,9 @@ def main(args):
     db_file = args.db  # noqa: F841
 
     cmd = getattr(args, "command", None)
+
+    if cmd == "command3" or cmd in module_a3.command_aliases:
+        module_a3.dostuff(args)
 
     if cmd == "command2" or cmd in module_a2.command_aliases:
         module_a2.dostuff(args)
