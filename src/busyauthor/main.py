@@ -59,6 +59,7 @@ parser.add_argument("--db", help="Specify the database file (e.g., data.cypher)"
 
 subparser = parser.add_subparsers(dest="command", help="Available commands")
 
+# Add top level commands here
 module_a1.add_subparsers(subparser)
 module_a2.add_subparsers(subparser)
 module_a3.add_subparsers(subparser)
