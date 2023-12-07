@@ -5,13 +5,13 @@ import sys
 from . import (
     __version__,
     args_common,
-    module_a1,
-    module_a2,
-    module_a3,
-    module_aa,
-    module_aaa,
-    module_aaaa,
-    module_aaaaa,
+    modl1c1,
+    modl1c2,
+    modl1c3,
+    modl2c1,
+    modl3c1,
+    modl4c1,
+    modl5c1,
 )
 
 
@@ -60,9 +60,9 @@ parser.add_argument("--db", help="Specify the database file (e.g., data.cypher)"
 subparser = parser.add_subparsers(dest="command", help="Available commands")
 
 # Add top level commands here
-module_a1.add_subparsers(subparser)
-module_a2.add_subparsers(subparser)
-module_a3.add_subparsers(subparser)
+modl1c1.add_subparsers(subparser)
+modl1c2.add_subparsers(subparser)
+modl1c3.add_subparsers(subparser)
 
 
 def main(args):
@@ -73,35 +73,35 @@ def main(args):
 
     cmd = getattr(args, "command", None)
 
-    if cmd == "command3" or cmd in module_a3.command_aliases:
-        module_a3.dostuff(args)
+    if cmd == "command3" or cmd in modl1c3.command_aliases:
+        modl1c3.dostuff(args)
 
-    if cmd == "command2" or cmd in module_a2.command_aliases:
-        module_a2.dostuff(args)
+    if cmd == "command2" or cmd in modl1c2.command_aliases:
+        modl1c2.dostuff(args)
 
-    if cmd == "command" or cmd in module_a1.command_aliases:
-        module_a1.dostuff(args)
+    if cmd == "command" or cmd in modl1c1.command_aliases:
+        modl1c1.dostuff(args)
 
         cmd = getattr(args, "subcommand", None)
 
-        if cmd == "subcommand" or cmd in module_aa.command_aliases:
-            module_aa.dostuff(args)
+        if cmd == "subcommand" or cmd in modl2c1.command_aliases:
+            modl2c1.dostuff(args)
 
             cmd = getattr(args, "subsubcommand", None)
 
-            if cmd == "subsubcommand" or cmd in module_aaa.command_aliases:
-                module_aaa.dostuff(args)
+            if cmd == "subsubcommand" or cmd in modl3c1.command_aliases:
+                modl3c1.dostuff(args)
 
                 cmd = getattr(args, "subsubsubcommand", None)
 
-                if cmd == "subsubsubcommand" or cmd in module_aaaa.command_aliases:
-                    module_aaaa.dostuff2(args)
-                    module_aaaa.dostuff()
+                if cmd == "subsubsubcommand" or cmd in modl4c1.command_aliases:
+                    modl4c1.dostuff2(args)
+                    modl4c1.dostuff()
 
                     cmd = getattr(args, "subsubsubsubcommand", None)
 
-                    if cmd == "subsubsubcommand" or cmd in module_aaaaa.command_aliases:
-                        module_aaaaa.dostuff(args)
+                    if cmd == "subsubsubcommand" or cmd in modl5c1.command_aliases:
+                        modl5c1.dostuff(args)
 
     _logger.info("Script ends here")
 

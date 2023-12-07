@@ -1,4 +1,4 @@
-from . import args_common, module_aaaa
+from . import args_common, modl4c1
 
 command_aliases = ["subsubcmd"]
 
@@ -19,7 +19,7 @@ def add_subparsers(parser):
         aliases=command_aliases,
     )
 
-    module_aaaa.add_subparsers(parser)
+    modl4c1.add_subparsers(parser)
 
     add_arguments(parser)
 
