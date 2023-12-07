@@ -26,5 +26,9 @@ def add_subparsers(parser):
     return parser
 
 
-def dostuff(args):
+def dostuff():
     print("doing work in subsubsubcommand")
+
+
+def dostuff2(args):
+    print(f"{args.subsubsubcommand_args=}")

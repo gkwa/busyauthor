@@ -69,33 +69,33 @@ def main(args):
     db_file = args.db  # noqa: F841
 
     cmd = getattr(args, "command", None)
+
     if cmd == "command2" or cmd in module_a2.command_aliases:
-        cmd_args = getattr(args, "command2_args", None)
-        module_a2.dostuff(cmd_args)
+        module_a2.dostuff(args)
 
     if cmd == "command" or cmd in module_a1.command_aliases:
-        cmd_args = getattr(args, "command_args", None)
-        module_a1.dostuff(cmd_args)
+        module_a1.dostuff(args)
 
         cmd = getattr(args, "subcommand", None)
+
         if cmd == "subcommand" or cmd in module_aa.command_aliases:
-            cmd_args = getattr(args, "subcommand_args", None)
-            module_aa.dostuff(cmd_args)
+            module_aa.dostuff(args)
 
             cmd = getattr(args, "subsubcommand", None)
+
             if cmd == "subsubcommand" or cmd in module_aaa.command_aliases:
-                cmd_args = getattr(args, "subsubcommand_args", None)
-                module_aaa.dostuff(cmd_args)
+                module_aaa.dostuff(args)
 
                 cmd = getattr(args, "subsubsubcommand", None)
+
                 if cmd == "subsubsubcommand" or cmd in module_aaaa.command_aliases:
-                    cmd_args = getattr(args, "subsubsubcommand_args", None)
-                    module_aaaa.dostuff(cmd_args)
+                    module_aaaa.dostuff2(args)
+                    module_aaaa.dostuff()
 
                     cmd = getattr(args, "subsubsubsubcommand", None)
+
                     if cmd == "subsubsubcommand" or cmd in module_aaaaa.command_aliases:
-                        cmd_args = getattr(args, "subsubsubsubcommand_args", None)
-                        module_aaaaa.dostuff(cmd_args)
+                        module_aaaaa.dostuff(args)
 
     _logger.info("Script ends here")
 

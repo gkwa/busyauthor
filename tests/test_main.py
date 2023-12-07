@@ -143,14 +143,6 @@ def test_main_with_command2_subcommand(capfd):
     assert captured.out.strip() == "doing work in command2"
 
 
-def test_main_with_command2_alias_subcommand(capfd):
-    """Test CLI with help argument"""
-    main(["cmd2"])
-    captured = capfd.readouterr()
-    assert captured.err.strip() == ""
-    assert captured.out.strip() == "doing work in command2"
-
-
 def test_main_with_command2_with_arg(capfd):
     """Test CLI with help argument"""
     main(["cmd2", "--command2", "test"])
@@ -211,3 +203,28 @@ def test_main_with_subsubsubsubcommand(capfd):
     assert (
         last_line == expected_pattern
     ), f"Last line does not match the expected pattern: {last_line}"
+
+
+def test_main_with_subsubsubcommand_with_args(capfd):
+    """Test CLI with help argument"""
+    main(["cmd", "subcmd", "subsubcmd", "subsubsubcmd", "--subsubsubcommand-args", "2"])
+    captured = capfd.readouterr()
+    assert "args.subsubsubcommand_args='2'" in captured.out.strip()
+
+
+def test_main_with_subsubsubcommand_wit_very_verbose(capfd):
+    """Test CLI with help argument"""
+    main(
+        [
+            "cmd",
+            "subcmd",
+            "subsubcmd",
+            "subsubsubcmd",
+            "--subsubsubcommand-args",
+            "2",
+            "--very-verbose",
+        ]
+    )
+    captured = capfd.readouterr()
+    assert "args.subsubsubcommand_args='2'" in captured.out.strip()
+    assert "Starting crazy calculations..." in captured.err.strip()
