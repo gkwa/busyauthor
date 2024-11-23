@@ -5,13 +5,11 @@
     {
       "automerge": true,
       "automergeStrategy": "merge-commit",
-      "automergeType": "branch",
       "matchDepTypes": ["*"],
       "recreateWhen": "always"
     }
   ],
   "platformAutomerge": true,
   "prConcurrentLimit": 0,
-  "prCreation": "immediate",
   "prHourlyLimit": 0
 }
